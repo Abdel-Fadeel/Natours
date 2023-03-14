@@ -19,11 +19,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// ROUTE HANDLERS
+// DATA
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
-
+// ROUTE HANDLERS
 const getAllTours = (req, res) => {
   res.status(200).json({
     status: 'success',
@@ -99,18 +99,50 @@ const deleteTour = (req, res) => {
   });
 };
 
-// ROUTES
-// app.get('/api/v1/tours', getAllTours);
-// app.post('/api/v1/tours', createTour);
-// app.get('/api/v1/tours/:id', getTour);
-// app.patch('/api/v1/tours/:id', updateTour);
-// app.delete('/api/v1/tours/:id', deleteTour);
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defned',
+  });
+};
+const createUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defned',
+  });
+};
+const getUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defned',
+  });
+};
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defned',
+  });
+};
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defned',
+  });
+};
+
 app.route('/api/v1/tours').get(getAllTours).post(createTour);
 app
   .route('/api/v1/tours/:id')
   .get(getTour)
   .patch(updateTour)
   .delete(deleteTour);
+
+app.route('/api/v1/users').get(getAllUsers).post(createUser);
+app
+  .route('/api/v1/users/:id')
+  .get(getUser)
+  .patch(updateUser)
+  .delete(deleteUser);
 
 const port = 3000;
 
