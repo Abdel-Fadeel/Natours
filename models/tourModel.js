@@ -104,4 +104,4 @@ tourSchema.pre('aggregate', function (next) {
   next();
 });
 
-module.exports = mongoose.model('tour', tourSchema);
+module.exports = mongoose.model('Tour', tourSchema);
