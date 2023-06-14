@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const crypto = require('crypto');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
@@ -15,6 +16,11 @@ const userSchema = new mongoose.Schema({
     validate: [validator.isEmail, 'Please provide us a valid email'],
   },
   photo: String,
+  role: {
+    type: String,
+    enum: ['user', 'guide', 'lead-guide', 'admin'],
+    default: 'user',
+  },
   password: {
     type: String,
     required: [true, 'Please provide a password'],
@@ -33,6 +39,8 @@ const userSchema = new mongoose.Schema({
     },
   },
   passwordChangedAt: Date,
+  passwordResetToken: String,
+  passwordResetExpires: Date,
 });
 
 userSchema.pre('save', async function (next) {
@@ -40,6 +48,13 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, 12);
   // NOT persist passwordConfirm in the database
   this.passwordConfirm = undefined;
+});
+
+userSchema.pre('save', function (next) {
+  if (!this.isModified('password') || this.isNew) return next();
+
+  this.passwordChangedAt = Date.now() - 1000;
+  next();
 });
 
 userSchema.methods.correctPassword = async function (
@@ -58,6 +73,16 @@ userSchema.methods.changedPasswordAfter = function (JWTTimeStamp) {
     return JWTTimeStamp < changedTimeStamp;
   }
   return false;
+};
+
+userSchema.methods.createPasswordResetToken = function () {
+  const userToken = crypto.randomBytes(32).toString('hex');
+  this.passwordResetToken = crypto
+    .createHash('sha256')
+    .update(userToken)
+    .digest('hex');
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+  return userToken;
 };
 
 module.exports = mongoose.model('user', userSchema);
