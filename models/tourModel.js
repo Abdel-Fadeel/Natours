@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
-const User = require('./userModel');
+// const User = require('./userModel');
 
 const tourSchema = new mongoose.Schema(
   {
@@ -100,7 +100,12 @@ const tourSchema = new mongoose.Schema(
         day: Number,
       },
     ],
-    guides: Array,
+    guides: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   {
     toJSON: { virtuals: true },
@@ -113,6 +118,13 @@ tourSchema.virtual('durationWeeks').get(function () {
 });
 
 // DOCUMENT MIDDLEWARE
+tourSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
+});
+
+// Embedding Solution
+/*
 tourSchema.pre('save', async function (next) {
   this.guides = await User.find({ _id: { $in: this.guides } });
   // Another solution
@@ -120,16 +132,19 @@ tourSchema.pre('save', async function (next) {
   // this.guides = await Promise.all(guidesPromises);
   next();
 });
+*/
 
-// DOCUMENT MIDDLEWARE
-tourSchema.pre('save', function (next) {
-  this.slug = slugify(this.name, { lower: true });
+// QUERY MIDDLEWARES
+tourSchema.pre(/^find/, function (next) {
+  this.find({ secretTour: { $ne: true } });
   next();
 });
 
-// QUERY MIDDLEWARE
 tourSchema.pre(/^find/, function (next) {
-  this.find({ secretTour: { $ne: true } });
+  this.populate({
+    path: 'guides',
+    select: '-__v -passwordChangedAt',
+  });
   next();
 });
 
