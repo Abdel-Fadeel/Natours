@@ -57,22 +57,11 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defned',
-  });
-};
 exports.getUser = (req, res) => {
   res.status(500).json({
     status: 'error',
     message: 'This route is not yet defned',
   });
 };
-exports.updateUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defned',
-  });
-};
+exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);
