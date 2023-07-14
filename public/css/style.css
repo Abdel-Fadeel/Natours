@@ -1195,7 +1195,7 @@ body {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  max-width: 80rem;
+  max-width: 85rem;
   text-align: center;
 }
 .error__title {
@@ -1211,7 +1211,7 @@ body {
   margin-bottom: 1rem;
 }
 .error__emoji {
-  font-size: 3.75rem;
+  font-size: 3rem;
   margin-left: 1rem;
 }
 .error__msg {

@@ -1,5 +1,4 @@
 extends base
-
 include _reviewCard
 
 mixin overviewBox(label,text,icon)
@@ -28,6 +27,7 @@ block content
           svg.heading-box__icon
             use(xlink:href='/img/icons.svg#icon-map-pin')
           span.heading-box__text= tour.startLocation.description
+
   section.section-description
     .overview-box
       div
@@ -60,8 +60,7 @@ block content
       .picture-box
         img.picture-box__img(src=`/img/tours/${image}`, alt=`${tour.name} Tour ${i+1}` class=`picture-box__img--${i}`)
 
-  section.section-map
-    #map
+  //- section.section-map
 
   section.section-reviews
     .reviews
