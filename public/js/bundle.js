@@ -12462,7 +12462,6 @@ function () {
           res = _context.sent;
 
           if (res.data.status === 'success') {
-            console.log(res);
             (0, _alerts.showAlert)('success', 'Logged in successfully!');
             window.setTimeout(function () {
               location.assign('/');
@@ -12509,7 +12508,11 @@ function () {
 
         case 3:
           res = _context2.sent;
-          if (res.data.status = 'success') location.reload(true);
+
+          if (res.data.status = 'success') {
+            if (window.location.pathname = '/me') location.assign('/');else location.reload(true);
+          }
+
           _context2.next = 10;
           break;
 
