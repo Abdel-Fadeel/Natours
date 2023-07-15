@@ -66,7 +66,7 @@ exports.login = catchAsync(async (req, res, next) => {
 });
 
 exports.logout = (req, res) => {
-  res.cookie('jwt', 'logged out', {
+  res.cookie('jwt', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
   });
@@ -114,7 +114,6 @@ exports.protect = catchAsync(async (req, res, next) => {
 });
 
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
-  console.log(req.cookies.jwt);
   if (req.cookies.jwt) {
     try {
       // 1) Verify the token
@@ -129,7 +128,6 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
       if (currentUser.changedPasswordAfter(decoded.iat)) return next();
       // 4) There is a Logged In User
       res.locals.user = currentUser;
-      console.log(res.locals);
       return next();
     } catch (err) {
       return next();

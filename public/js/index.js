@@ -1,6 +1,6 @@
 /* eslint-disable */
 import '@babel/polyfill';
-import { login, logout } from './login';
+import { login, logout } from './auth';
 
 // DOM ELEMENTS
 const loginForm = document.querySelector('.form--login');
