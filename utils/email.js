@@ -32,6 +32,8 @@ module.exports = class Email {
       subject,
     });
 
+    return console.log(html);
+
     // 2) Define email options
     const mailOptions = {
       from: this.from,
@@ -47,5 +49,12 @@ module.exports = class Email {
 
   async sendWelcome() {
     await this.send('welcome', 'Welcome to the Natours Family!');
+  }
+
+  async sendPasswordReset() {
+    await this.send(
+      'passwordReset',
+      'Your password reset token (valid for 10 min)'
+    );
   }
 };
