@@ -12,14 +12,20 @@ module.exports = class Email {
 
   newTransporter() {
     if (process.env.NODE_ENV === 'prodction') {
-      return 1;
+      return nodemailer.createTransport({
+        service: 'SendGrid',
+        auth: {
+          user: process.env.SENDGRID_USERNAME,
+          pass: process.env.SENDGRID_PASSWORD,
+        },
+      });
     }
     return nodemailer.createTransport({
-      host: 'sandbox.smtp.mailtrap.io',
-      port: 25,
+      host: process.env.HOST,
+      port: process.env.PORT,
       auth: {
-        user: '6aa8ae311313e6',
-        pass: '8ed7ef12b50fa3',
+        user: process.env.USERNAME,
+        pass: process.env.PASSWORD,
       },
     });
   }
@@ -31,8 +37,6 @@ module.exports = class Email {
       url: this.url,
       subject,
     });
-
-    return console.log(html);
 
     // 2) Define email options
     const mailOptions = {
