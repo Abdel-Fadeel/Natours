@@ -12650,7 +12650,7 @@ function () {
           _context.prev = 0;
           _context.next = 3;
           return _axios.default.get("/checkout-session/".concat(tourId), {
-            baseURL: 'http://localhost:3000/ap/v1/bookings',
+            baseURL: 'http://localhost:3000/api/v1/bookings',
             withCredentials: true
           });
 
@@ -13077,7 +13077,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3816" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "10216" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
