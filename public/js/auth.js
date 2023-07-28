@@ -11,7 +11,7 @@ export const login = async (email, password) => {
         password,
       },
       {
-        baseURL: 'http://localhost:3000/api/v1',
+        baseURL: '/api/v1',
         withCredentials: true,
       }
     );
@@ -30,7 +30,7 @@ export const login = async (email, password) => {
 export const logout = async () => {
   try {
     const res = await axios.get('/users/logout', {
-      baseURL: 'http://localhost:3000/api/v1',
+      baseURL: '/api/v1',
     });
 
     if ((res.data.status = 'success')) {
