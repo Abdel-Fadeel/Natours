@@ -4,7 +4,7 @@ const User = require('../models/userModel');
 const Booking = require('../models/bookingModel');
 const AppError = require('../utils/appError');
 
-exports.alerts = (res, res, next) => {
+exports.alerts = (req, res, next) => {
   const { alert } = req.query;
   if (alert === 'booking')
     res.locals.alert =
