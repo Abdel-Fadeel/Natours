@@ -7,7 +7,7 @@ export const stripe = Stripe(
 
 export const bookTour = async (tourId) => {
   try {
-    const res = await axios.get(`/npbookings/checkout-session/${tourId}`, {
+    const res = await axios.get(`/bookings/checkout-session/${tourId}`, {
       baseURL: '/api/v1',
       withCredentials: true,
     });
