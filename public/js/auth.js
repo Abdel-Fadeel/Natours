@@ -2,6 +2,32 @@
 import axios from 'axios';
 import { showAlert } from './alerts';
 
+export const signup = async (name, email, password, passwordConfirm) => {
+  try {
+    const res = await axios.post(
+      '/users/signup',
+      {
+        name,
+        email,
+        password,
+        passwordConfirm,
+      },
+      {
+        baseURL: '/api/v1',
+        withCredentials: true,
+      }
+    );
+
+    if (res.data.status === 'success') {
+      showAlert('success', 'Signed up successfully!');
+      window.setTimeout(() => {
+        location.assign('/');
+      }, 1500);
+    }
+  } catch (err) {
+    showAlert('error', err.response.data.message);
+  }
+};
 export const login = async (email, password) => {
   try {
     const res = await axios.post(
