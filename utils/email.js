@@ -5,27 +5,20 @@ const htmlToText = require('html-to-text');
 module.exports = class Email {
   constructor(user, url) {
     this.to = user.email;
-    this.from = `Abdel-Fadeel Hamdy <${process.env.EMAIL_FROM}>`;
+    this.from = `Natours <${process.env.EMAIL_FROM}>`;
     this.firstName = user.name.split(' ')[0];
     this.url = url;
   }
 
   newTransporter() {
-    if (process.env.NODE_ENV === 'prodction') {
-      return nodemailer.createTransport({
-        service: 'SendGrid',
-        auth: {
-          user: process.env.SENDGRID_USERNAME,
-          pass: process.env.SENDGRID_PASSWORD,
-        },
-      });
-    }
+    // Any SMTP provider works (Brevo, SendGrid, Mailtrap, Gmail...).
+    // For SendGrid: EMAIL_HOST=smtp.sendgrid.net, EMAIL_USERNAME=apikey
     return nodemailer.createTransport({
-      host: process.env.HOST,
-      port: process.env.PORT,
+      host: process.env.EMAIL_HOST,
+      port: Number(process.env.EMAIL_PORT) || 587,
       auth: {
-        user: process.env.USERNAME,
-        pass: process.env.PASSWORD,
+        user: process.env.EMAIL_USERNAME,
+        pass: process.env.EMAIL_PASSWORD,
       },
     });
   }

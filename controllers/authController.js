@@ -45,7 +45,10 @@ const createSendToken = (user, statusCode, req, res) => {
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create(req.body);
   const url = `${req.protocol}://${req.get('host')}/me`;
-  // await new Email(newUser, url).sendWelcome();
+  // Send the welcome email in the background so a mail failure never blocks signup
+  new Email(newUser, url)
+    .sendWelcome()
+    .catch((err) => console.log('Welcome email failed:', err.message));
   createSendToken(newUser, 201, req, res);
 });
 

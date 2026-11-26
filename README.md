@@ -11,7 +11,7 @@ A full-stack tour-booking app: browse adventure tours, read reviews, log in, man
 - Sign up, log in and log out with JWT stored in an HTTP-only cookie.
 - Account page: update your name, email and photo (resized with Sharp) and change your password.
 - Book a tour with **Stripe Checkout** and view your bookings.
-- Welcome and password-reset emails (Nodemailer, with SendGrid in production).
+- Welcome and password-reset emails (Nodemailer over any SMTP provider, such as Brevo or SendGrid).
 
 **REST API** (`/api/v1`)
 - **Tours:** CRUD plus filtering, sorting, field limiting and pagination (`APIFeatures` class), an alias route (`/top-5-cheap`), aggregation pipelines (`/tour-stats`, `/monthly-plan/:year`) and **geospatial queries** (`/tours-within/...`, `/distances/...`).
@@ -30,16 +30,16 @@ A full-stack tour-booking app: browse adventure tours, read reviews, log in, man
 |---|---|
 | Back end | Node.js 20, Express 4 |
 | Database | MongoDB Atlas + Mongoose 5 (virtual populate, indexes, geospatial, aggregation) |
-| Views | Pug templates, vanilla JS (bundled with Parcel), Axios |
+| Views | Pug templates, vanilla JS (bundled with esbuild), Axios |
 | Auth | JWT, bcryptjs, cookies |
 | Payments | Stripe Checkout |
-| Email | Nodemailer, SendGrid, Mailtrap (development) |
+| Email | Nodemailer + SMTP (Brevo / SendGrid / Mailtrap) |
 | Images | Multer + Sharp |
 | Hosting | Render, MongoDB Atlas |
 
 ## Architecture
 
-MVC: `models/` (Mongoose schemas plus middleware), `controllers/` (including a generic `handlerFactory` for CRUD), `routes/`, and `views/` (Pug). The front-end JS lives in `public/js/` and is bundled into `bundle.js`.
+MVC: `models/` (Mongoose schemas plus middleware), `controllers/` (including a generic `handlerFactory` for CRUD), `routes/`, and `views/` (Pug). The front-end JS lives in `public/js/` and is bundled into `bundle.js` with esbuild.
 
 ## Getting started
 
