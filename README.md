@@ -2,7 +2,7 @@
 
 A full-stack tour-booking app: browse adventure tours, read reviews, log in, manage your account and book tours with Stripe. Built with **Node.js, Express and MongoDB**. Pages are rendered on the server with **Pug**, and the same back end exposes a full **REST API**.
 
-**Live demo:** _coming soon_ · Log in with **`laura@example.com`** / **`test1234`** (demo user). The app runs on Render's free tier, so the first request may take up to a minute to wake it up.
+**Live demo:** [natours-0p40.onrender.com](https://natours-0p40.onrender.com) · Log in with **`laura@example.com`** / **`test1234`** (demo user). The app runs on Render's free tier, so the first request may take up to a minute to wake it up.
 
 ## Features
 
