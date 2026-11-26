@@ -10,6 +10,7 @@ process.on('uncaughtException', (err) => {
 dotenv.config({ path: './config.env' });
 
 const app = require('./app');
+const seedDemoData = require('./utils/seedDemoData');
 
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
@@ -23,7 +24,10 @@ mongoose
     useFindAndModify: false,
     useUnifiedTopology: true,
   })
-  .then(() => console.log('Connected to DB successfully!'));
+  .then(async () => {
+    console.log('Connected to DB successfully!');
+    await seedDemoData();
+  });
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {

@@ -21,6 +21,9 @@ const viewsRouter = require('./routes/viewsRoutes');
 
 const app = express();
 
+// Trust the hosting proxy so req.secure works over HTTPS (secure cookies)
+app.enable('trust proxy');
+
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
