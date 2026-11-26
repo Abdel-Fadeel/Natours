@@ -4,6 +4,8 @@ A full-stack tour-booking app: browse adventure tours, read reviews, log in, man
 
 **Live demo:** [natours-0p40.onrender.com](https://natours-0p40.onrender.com) · Log in with **`laura@example.com`** / **`test1234`** (demo user). The app runs on Render's free tier, so the first request may take up to a minute to wake it up.
 
+> **Note:** Stripe payments and emails are turned off in the live demo because no API keys are configured. Add `STRIPE_*` and `EMAIL_*` keys (see [`config.env.example`](config.env.example)) to enable them locally.
+
 ## Features
 
 **Website (server-side rendered)**
@@ -48,6 +50,7 @@ git clone https://github.com/Abdel-Fadeel/Natours.git
 cd Natours
 npm install
 cp config.env.example config.env   # then fill in your values
+npm run build:js
 npm run dev
 ```
 
